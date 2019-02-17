@@ -11,6 +11,33 @@ Un producto tiene al menos la siguiente información:
  - Facet: atributos por los que se debe buscar/filtrar otros items dentro de la taxonommia
  - Vendors: un mismo SKU debe ser porporcionado por diferentes tiendas/negocios
  
+```plantuml
+@startuml
+
+!define collection(x) class x << (C,#FFAAAA) >>
+!define embedded(x) class x << (E,#42f49e) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+collection(Category) {
+  primary_key(id : oid)
+  name: string
+  parent : oid
+  count : long
+}
+
+embedded(Attribute) {
+    key : string
+    value : string
+}
+
+Category "0..*" *-- Category : parent
+Category "1" *-- "*" Attribute : facets
+
+@enduml
+```
+
 ![Detalle de producto](product.png)
   
 Un ejemplo de esta estructura quedaría de la siguiente forma: 

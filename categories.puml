@@ -1,0 +1,24 @@
+@startuml
+
+!define collection(x) class x << (C,#FFAAAA) >>
+!define embedded(x) class x << (E,#42f49e) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+collection(Category) {
+  primary_key(id : oid)
+  name: string
+  parent : oid
+  count : long
+}
+
+embedded(Attribute) {
+    key : string
+    value : string
+}
+
+Category "0..*" *-- Category : parent
+Category "1" *-- "*" Attribute : facets
+
+@enduml

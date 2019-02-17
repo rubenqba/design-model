@@ -1,0 +1,26 @@
+@startuml
+
+!define collection(x) class x << (C,#FFAAAA) >>
+!define embedded(x) class x << (E,#42f49e) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotype
+
+collection(Price) {
+    id : composite_id
+    price : double
+    updated_at: timestamp
+}
+
+embedded(Sale) {
+    sale_price : double
+    sale_end: timestamp
+    taxes : double
+}
+
+note left of Sale
+this is optional
+end note
+
+Price *-- Sale
+@enduml

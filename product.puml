@@ -1,0 +1,43 @@
+@startuml
+
+!define collection(x) class x << (C,#FFAAAA) >>
+!define embedded(x) class x << (E,#42f49e) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+collection(Product) {
+    primary_key(id : oid)
+    name : string
+    sku : string
+    description : string
+    category : string
+    price : double
+}
+
+embedded(Vendor) {
+    primary_key(id : oid)
+    brand_name : string
+    image : URL
+}
+
+embedded(Shipping) {
+}
+
+embedded(ImageAssets) {
+    height : integer
+    width : integer
+    url : URL
+}
+
+embedded(Attribute) {
+    key : string
+    value : string
+}
+
+Product *-- Vendor : vendor
+Product *-- Shipping : shipping
+Product "1..*" *-- Attribute : attributes
+Product "1..*" *-- ImageAssets : assets
+
+@enduml
